@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="760" viewBox="0 0 1020 760" font-family="Arial, Helvetica, sans-serif">
+  <rect width="1020" height="760" fill="#0f172a"/>
+
+  <text x="30" y="46" fill="#f8fafc" font-size="26" font-weight="bold">Google Cloud Console — "Add or remove scopes" panel</text>
+  <text x="30" y="76" fill="#94a3b8" font-size="16">Filter box = panel ke andar, list ke thik upar wala chhota text input. Koi website nahi.</text>
+
+  <!-- browser window -->
+  <rect x="30" y="100" width="960" height="600" rx="12" fill="#ffffff"/>
+  <rect x="30" y="100" width="960" height="44" rx="12" fill="#e2e8f0"/>
+  <rect x="30" y="132" width="960" height="12" fill="#e2e8f0"/>
+  <circle cx="56" cy="122" r="6" fill="#ef4444"/>
+  <circle cx="78" cy="122" r="6" fill="#f59e0b"/>
+  <circle cx="100" cy="122" r="6" fill="#22c55e"/>
+  <rect x="120" y="112" width="380" height="20" rx="10" fill="#f8fafc"/>
+  <text x="132" y="127" fill="#64748b" font-size="12">console.cloud.google.com/apis/credentials/consent</text>
+
+  <!-- page title -->
+  <text x="60" y="184" fill="#0f172a" font-size="20" font-weight="bold">Data Access</text>
+  <text x="60" y="208" fill="#64748b" font-size="14">(purane console me: OAuth consent screen → Step 2 "Scopes")</text>
+
+  <!-- panel -->
+  <rect x="60" y="228" width="900" height="440" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="84" y="262" fill="#0f172a" font-size="18" font-weight="bold">Add or remove scopes</text>
+  <text x="84" y="284" fill="#64748b" font-size="13">Select the scopes your app needs to access Google APIs</text>
+
+  <!-- FILTER BOX highlighted -->
+  <rect x="84" y="300" width="330" height="40" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="3"/>
+  <circle cx="106" cy="320" r="7" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="111" y1="325" x2="117" y2="331" stroke="#94a3b8" stroke-width="2"/>
+  <text x="130" y="326" fill="#334155" font-size="14" font-family="monospace">drive</text>
+  <line x1="152" y1="308" x2="152" y2="332" stroke="#2563eb" stroke-width="2"/>
+
+  <!-- callout 1 -->
+  <line x1="414" y1="320" x2="520" y2="320" stroke="#2563eb" stroke-width="3"/>
+  <circle cx="546" cy="320" r="18" fill="#2563eb"/>
+  <text x="546" y="327" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">1</text>
+  <text x="576" y="314" fill="#1e3a8a" font-size="16" font-weight="bold">Yahan "drive" type karo</text>
+  <text x="576" y="334" fill="#475569" font-size="13">Yeh filter box hai — list chhoti ho jayegi (100+ scopes se 5-6)</text>
+
+  <!-- table header -->
+  <rect x="84" y="356" width="852" height="30" fill="#e2e8f0"/>
+  <text x="100" y="376" fill="#334155" font-size="13" font-weight="bold">API</text>
+  <text x="250" y="376" fill="#334155" font-size="13" font-weight="bold">Scope</text>
+
+  <!-- rows -->
+  <rect x="84" y="386" width="852" height="34" fill="#ffffff"/>
+  <rect x="100" y="396" width="16" height="16" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="250" y="409" fill="#64748b" font-size="13" font-family="monospace">.../auth/drive.appdata</text>
+
+  <rect x="84" y="420" width="852" height="34" fill="#eff6ff"/>
+  <rect x="100" y="430" width="16" height="16" rx="3" fill="#2563eb" stroke="#2563eb" stroke-width="2"/>
+  <path d="M103 438 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+  <text x="250" y="443" fill="#0f172a" font-size="13" font-family="monospace" font-weight="bold">.../auth/drive.readonly</text>
+  <text x="620" y="443" fill="#1d4ed8" font-size="12">← PADHNA (yahi chahiye)</text>
+
+  <rect x="84" y="454" width="852" height="34" fill="#ffffff"/>
+  <rect x="100" y="464" width="16" height="16" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="250" y="477" fill="#64748b" font-size="13" font-family="monospace">.../auth/drive.file</text>
+
+  <rect x="84" y="488" width="852" height="34" fill="#ffffff"/>
+  <rect x="100" y="498" width="16" height="16" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="250" y="511" fill="#64748b" font-size="13" font-family="monospace">.../auth/drive.metadata.readonly</text>
+
+  <rect x="84" y="522" width="852" height="34" fill="#ffffff"/>
+  <rect x="100" y="532" width="16" height="16" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="250" y="545" fill="#64748b" font-size="13" font-family="monospace">.../auth/drive</text>
+  <text x="620" y="545" fill="#b45309" font-size="12">← full access (sirf /quotafix ke liye)</text>
+
+  <!-- callout 2 -->
+  <line x1="118" y1="437" x2="118" y2="600" stroke="#16a34a" stroke-width="0"/>
+  <circle cx="880" cy="437" r="18" fill="#16a34a"/>
+  <text x="880" y="444" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">2</text>
+
+  <!-- bottom bar of panel -->
+  <line x1="84" y1="572" x2="936" y2="572" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="84" y="600" fill="#64748b" font-size="13">Manually add scopes</text>
+  <text x="84" y="620" fill="#94a3b8" font-size="12">(yahan poori string paste karne ka option bhi hai — see step 4)</text>
+
+  <rect x="812" y="586" width="124" height="38" rx="6" fill="#2563eb"/>
+  <text x="874" y="611" fill="#ffffff" font-size="16" font-weight="bold" text-anchor="middle">Update</text>
+  <circle cx="792" cy="605" r="18" fill="#7c3aed"/>
+  <text x="792" y="612" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">3</text>
+
+  <!-- legend bottom -->
+  <rect x="30" y="716" width="960" height="34" rx="8" fill="#1e293b"/>
+  <text x="48" y="739" fill="#cbd5e1" font-size="14">1 filter me "drive" likho &#183; 2 drive.readonly tick karo &#183; 3 Update dabao &#183; baaki kisi ko touch mat karo</text>
+
+  <!-- arrows text top right -->
+  <text x="470" y="404" fill="#1d4ed8" font-size="12" font-weight="bold">tick = blue checkbox</text>
+</svg>

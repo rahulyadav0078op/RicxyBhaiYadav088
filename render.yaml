@@ -1,0 +1,93 @@
+# render.yaml — Render Blueprint (Infrastructure as Code)
+#
+# Deploy: push this repo to GitHub -> Render Dashboard -> New -> Blueprint ->
+# pick the repo. Render reads this file and creates everything below.
+#
+# WHY A *WORKER* AND NOT A *WEB SERVICE*:
+#   This bot polls Telegram outbound; it never receives HTTP requests. A Render
+#   web service that gets no traffic free-spins down (free plan) and sits behind
+#   a router timeout that kills long uploads. A background worker just runs —
+#   exactly what a polling bot + multi-GB uploads need.
+#
+# UPLOAD SIZE REALITY (verified against Telegram docs, Oct 2026):
+#   Telegram's documented bot upload ceiling on the public API is 50 MB
+#   (core.telegram.org/bots/faq). Files well above that often pass, but it is not
+#   guaranteed. With a local Bot API server the ceiling is 2000 MB and the bot can
+#   hand Telegram a file path directly. Render supports sidecars/private services,
+#   but the simplest reliable path for a 2 GB video is still to let the bot split
+#   the file (it does this automatically above MAX_UPLOAD_MB).
+#
+# WHY A DISK:
+#   The resume ledger (which files were already sent) and half-finished .part
+#   downloads live on disk. Without a persistent disk, every deploy/restart
+#   wipes them and the course restarts from file 1.
+
+services:
+  - type: worker
+    name: gdrive-telegram-bot
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter            # paid plan; disks are not available on free
+    region: singapore        # closest to India among Render regions
+    autoDeploy: true
+    numInstances: 1          # never scale >1: two pollers = duplicate uploads
+
+    disk:
+      name: bot-data
+      mountPath: /data
+      sizeGB: 10             # bump to 20+ if MAX_DOWNLOAD_GB is large
+
+    envVars:
+      # --- paths (match the disk mount) ---
+      - key: DATA_DIR
+        value: /data
+      - key: TEMP_DIR
+        value: /data/tmp
+      - key: JOBS_DB
+        value: /data/jobs.sqlite3
+
+      # --- secrets: set these in the Render dashboard, never in git ---
+      - key: BOT_TOKEN
+        sync: false
+      - key: ALLOWED_USER_IDS
+        sync: false
+      # OAuth path (recommended):
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REFRESH_TOKEN
+        sync: false
+      # ...or service-account path instead (paste whole JSON, single line):
+      - key: GOOGLE_SERVICE_ACCOUNT_JSON
+        sync: false
+
+      # --- Drive access behaviour ---
+      - key: DRIVE_SCOPE
+        value: readonly       # switch to "full" only if you want /quotafix
+      - key: AUTO_QUOTA_FIX
+        value: "false"        # needs DRIVE_SCOPE=full to do anything
+
+      - key: FOLDER_ORDER
+        value: deep
+      - key: FOLDER_RECURSIVE
+        value: "true"
+      - key: MAX_FOLDER_FILES
+        value: "300"
+      - key: MAX_DOWNLOAD_GB
+        value: "15"          # keep well under disk sizeGB
+      - key: MAX_UPLOAD_MB
+        value: "2000"
+      - key: CONCURRENT_DOWNLOADS
+        value: "1"           # starter instance is small; 1 is safest
+      - key: KEEP_DOWNLOADED_FILES
+        value: "false"
+      - key: HEALTHCHECK_ENABLED
+        value: "false"       # workers have no port
+      - key: STARTUP_REPORT
+        value: "true"        # bot pings you on every deploy with a health summary
+      - key: MEDIA_WRITE_TIMEOUT
+        value: "1800"        # PTB defaults media uploads to 20s — far too low
+      - key: LOG_LEVEL
+        value: "INFO"

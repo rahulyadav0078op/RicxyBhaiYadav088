@@ -1,0 +1,13 @@
+python-telegram-bot[rate-limiter]==21.9
+aiohttp>=3.9,<4
+google-auth>=2.30
+google-auth-oauthlib>=1.2
+google-api-python-client>=2.120
+python-dotenv>=1.0
+
+# Optional but recommended: ships a static ffmpeg binary in the Python wheel.
+# The Docker image installs the real ffmpeg from apt (which also gives ffprobe),
+# so this is only a safety net for hosts where apt is unavailable
+# (Kaggle/Colab notebooks, locked-down containers). /merge and /streamdl use
+# whichever ffmpeg they find first.
+imageio-ffmpeg>=0.5

@@ -1,0 +1,67 @@
+{
+  "name": "gdrive-telegram-bot",
+  "description": "Google Drive to Telegram bot: downloads files your Google account can access and re-uploads them losslessly, in course order.",
+  "repository": "https://github.com/YOUR_USERNAME/gdrive-bot",
+  "keywords": ["telegram", "google-drive", "bot", "python"],
+  "stack": "container",
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "env": {
+    "BOT_TOKEN": {
+      "description": "Bot token from @BotFather",
+      "required": true
+    },
+    "ALLOWED_USER_IDS": {
+      "description": "Comma-separated Telegram numeric user ids allowed to use the bot. Do not leave empty in production.",
+      "required": true
+    },
+    "GOOGLE_CLIENT_ID": {
+      "description": "OAuth client id (from oauth_setup.py)",
+      "required": false
+    },
+    "GOOGLE_CLIENT_SECRET": {
+      "description": "OAuth client secret",
+      "required": false
+    },
+    "GOOGLE_REFRESH_TOKEN": {
+      "description": "OAuth refresh token — grants read-only access to your Drive",
+      "required": false
+    },
+    "GOOGLE_SERVICE_ACCOUNT_JSON": {
+      "description": "Alternative to OAuth: paste the whole service-account key JSON on one line",
+      "required": false
+    },
+    "FOLDER_ORDER": {
+      "description": "deep = whole Module 1 then Module 2; breadth = level by level",
+      "value": "deep",
+      "required": false
+    },
+    "MAX_DOWNLOAD_GB": {
+      "description": "Refuse files bigger than this",
+      "value": "15",
+      "required": false
+    },
+    "CONCURRENT_DOWNLOADS": {
+      "description": "Parallel transfers (1 is safest on small dynos)",
+      "value": "1",
+      "required": false
+    },
+    "JOBS_DB": {
+      "description": "Resume ledger path (inside the mounted volume on Render)",
+      "value": "/data/jobs.sqlite3",
+      "required": false
+    },
+    "TEMP_DIR": {
+      "description": "Scratch space for downloads",
+      "value": "/data/tmp",
+      "required": false
+    }
+  },
+  "build": {
+    "dockerfile": "Dockerfile"
+  }
+}
